@@ -1,29 +1,42 @@
 package com.oferta.telefonica.service.impl;
 
 import com.oferta.telefonica.model.entity.Cliente;
+import com.oferta.telefonica.model.entity.Linea;
 import com.oferta.telefonica.repository.IClientRepository;
+import com.oferta.telefonica.repository.ILineRepository;
 import com.oferta.telefonica.service.IClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class ClientServiceImpl implements IClientService {
 
     @Autowired
     private IClientRepository clientRepository;
 
+    @Autowired
+    private ILineRepository lineRepository;
+
     @Override
     public ResponseEntity<Cliente> saveClient(Cliente cliente) {
         Map<String, Object> response = new HashMap<>();
-        Cliente createClient = clientRepository.save(cliente);
 
+        Optional<Cliente> getClient = Optional.ofNullable(clientRepository.validate(cliente.getTypeDocument(), cliente.getNumberDocument())
+                .orElse(Cliente.builder().build()));
+
+        if(getClient.get().getId() != null){
+            response.put("mensaje", "el cliente con estos datos ya existe");
+            return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
+        }
+
+        Cliente createClient = clientRepository.save(cliente);
         response.put("mensaje", "Se registró el cliente correctamente");
         response.put("cliente", createClient);
 
@@ -46,7 +59,25 @@ public class ClientServiceImpl implements IClientService {
     @Override
     public ResponseEntity<List<Cliente>> getAllClient() {
         Map<String, Object> response = new HashMap<>();
-        Iterable<Cliente> listClient = clientRepository.findAll();
+        List<Cliente> listClient = clientRepository.findAll();
+//        List<Cliente> listaClient = clientRepository.findAll()
+//                .stream()
+//                .map(c -> {
+//                    Optional<Linea> linea = lineRepository.findById(c.getId());
+//                    List<Linea> lista = new ArrayList<>();
+//                    Linea lin = new Linea();
+//                    lin.setId(linea.get().getId());
+//                    lin.setCliente(linea.get().getCliente());
+//                    lin.setEstado(linea.get().getEstado());
+//                    lin.setOfertas(linea.get().getOfertas());
+//                    lin.setType(linea.get().getType());
+//                    lin.setNombrePlan(linea.get().getNombrePlan());
+//                    lin.setNroTelefono(linea.get().getNroTelefono());
+//                    lista.add(lin);
+//                    c.setLineas(lista);
+//                    return c;
+//                })
+//                .collect(Collectors.toList());
 
         response.put("mensaje", "Se registró el cliente correctamente");
         response.put("cliente", listClient);
@@ -73,14 +104,15 @@ public class ClientServiceImpl implements IClientService {
 
     @Override
     public ResponseEntity<Cliente> deleteClient(Long id) {
-        Map<String, Object> response = new HashMap<>();
-        return clientRepository.findById(id).map(c -> {
-            response.put("mensaje", "Se elimino el cliente correctamente");
-            response.put("cliente", c);
-
-            clientRepository.deleteById(c.getId());
-            return new ResponseEntity(response, HttpStatus.OK);
-        }).orElse(new ResponseEntity("no se encontro al cliente", HttpStatus.BAD_REQUEST));
+//        Map<String, Object> response = new HashMap<>();
+//        return clientRepository.findById(id).map(c -> {
+//            response.put("mensaje", "Se elimino el cliente correctamente");
+//            response.put("cliente", c);
+//
+//            clientRepository.delete(c);
+//            return new ResponseEntity(response, HttpStatus.OK);
+//        }).orElse(new ResponseEntity("no se encontro al cliente", HttpStatus.BAD_REQUEST));
+        return null;
     }
 
 

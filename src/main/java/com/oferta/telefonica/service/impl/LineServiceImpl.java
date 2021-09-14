@@ -8,11 +8,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
+@Transactional
 public class LineServiceImpl implements ILineService {
 
     @Autowired
@@ -30,7 +33,9 @@ public class LineServiceImpl implements ILineService {
     }
 
     @Override
-    public ResponseEntity<List<Linea>> getAllLine() {
+    public ResponseEntity<Linea> getLineById(Long id) {
         return null;
     }
+
+
 }

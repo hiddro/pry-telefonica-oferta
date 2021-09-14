@@ -9,5 +9,5 @@ public interface ILineService {
 
     public ResponseEntity<Linea> saveLine(Linea linea);
 
-    public ResponseEntity<List<Linea>> getAllLine();
+    public ResponseEntity<Linea> getLineById(Long id);
 }

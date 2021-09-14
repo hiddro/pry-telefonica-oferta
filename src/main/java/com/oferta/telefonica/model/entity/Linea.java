@@ -39,7 +39,7 @@ public class Linea implements Serializable {
     @JsonBackReference
     private Cliente cliente;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "linea_id")
     private List<Oferta> ofertas;
 }
