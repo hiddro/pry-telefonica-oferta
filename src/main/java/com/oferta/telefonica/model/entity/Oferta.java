@@ -12,7 +12,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "oferta")
+@Table(name = "ofertas")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,14 +29,14 @@ public class Oferta implements Serializable {
     private String descripcion;
 
     @NotNull
-    @Column(name = "create_client")
+    @Column(name = "start_oferta")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date startOferta;
 
     @NotNull
-    @Column(name = "create_client")
+    @Column(name = "end_oferta")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")

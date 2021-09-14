@@ -1,5 +1,6 @@
 package com.oferta.telefonica.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "line")
+@Table(name = "lineas")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,7 +35,11 @@ public class Linea implements Serializable {
     @Column(name = "nombre_plan")
     private String nombrePlan;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    private Cliente cliente;
+
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "oferta_id")
+    @JoinColumn(name = "linea_id")
     private List<Oferta> ofertas;
 }

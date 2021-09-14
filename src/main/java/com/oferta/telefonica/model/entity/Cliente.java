@@ -15,7 +15,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "client")
+@Table(name = "clientes")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

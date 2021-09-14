@@ -11,8 +11,8 @@ import javax.validation.Valid;
 import java.util.*;
 
 @RestController
-@RequestMapping("api/oferta")
-public class OfertaController {
+@RequestMapping("api/client")
+public class ClientController {
 
     @Autowired
     private IClientService clientService;
