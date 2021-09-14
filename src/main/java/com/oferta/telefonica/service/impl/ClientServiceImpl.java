@@ -5,6 +5,7 @@ import com.oferta.telefonica.model.entity.Linea;
 import com.oferta.telefonica.repository.IClientRepository;
 import com.oferta.telefonica.repository.ILineRepository;
 import com.oferta.telefonica.service.IClientService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional
 public class ClientServiceImpl implements IClientService {
 
     @Autowired
