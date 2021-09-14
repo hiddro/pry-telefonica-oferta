@@ -79,7 +79,7 @@ public class ClientServiceImpl implements IClientService {
 //                })
 //                .collect(Collectors.toList());
 
-        response.put("mensaje", "Se registró el cliente correctamente");
+        response.put("mensaje", "Se encontro todos los clientes correctamente");
         response.put("cliente", listClient);
 
         return new ResponseEntity(response, HttpStatus.OK);
