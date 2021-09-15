@@ -16,8 +16,6 @@ import java.util.*;
 @RequestMapping("api/client")
 public class ClientController {
 
-//    private static final Logger LOGGER = LoggerFactory.getLogger(ClientController.class);
-
     @Autowired
     private IClientService clientService;
 
@@ -33,7 +31,6 @@ public class ClientController {
 
     @GetMapping("/searchAll")
     public ResponseEntity<List<Cliente>> getAllClient(){
-//        LOGGER.info("Buscando todos los Clientes");
         return clientService.getAllClient();
     }
 

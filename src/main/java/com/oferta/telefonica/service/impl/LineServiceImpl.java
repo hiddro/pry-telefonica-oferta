@@ -94,5 +94,23 @@ public class LineServiceImpl implements ILineService {
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
+    @Override
+    public ResponseEntity<Linea> getLineOfert(String type, String number) {
+        Map<String, Object> response = new HashMap<>();
+
+        Optional<Cliente> cliente = Optional.ofNullable(clientRepository.validate(type, number).orElse(Cliente.builder().build()));
+
+        if(cliente.get().getIdCliente() == null){
+            response.put("mensaje", "el cliente con estos datos no existe");
+            return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
+        }
+
+        response.put("mensaje", "Las Lineas y Ofertas de " + cliente.get().getName());
+        response.put("linea", cliente.get().getLineas());
+
+        return new ResponseEntity(response, HttpStatus.OK);
+
+    }
+
 
 }

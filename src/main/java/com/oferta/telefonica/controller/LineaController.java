@@ -32,4 +32,9 @@ public class LineaController {
     public ResponseEntity<Linea> joinLineOferta(@Valid @PathVariable Long idL, @Valid @PathVariable Long idO){
         return lineService.joinLineOferta(idL, idO);
     }
+
+    @GetMapping("/get/{type}/{number}")
+    public ResponseEntity<Linea> getReturnLineOfert(@Valid @PathVariable String type, @Valid @PathVariable String number){
+        return lineService.getLineOfert(type, number);
+    }
 }
