@@ -2,6 +2,7 @@ package com.oferta.telefonica.controller;
 
 import com.oferta.telefonica.model.entity.Cliente;
 import com.oferta.telefonica.model.entity.Linea;
+import com.oferta.telefonica.model.entity.Oferta;
 import com.oferta.telefonica.service.ILineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,5 +26,10 @@ public class LineaController {
     @GetMapping("/{id}")
     public ResponseEntity<Linea> getLineById(@Valid @PathVariable Long id){
         return lineService.getLineById(id);
+    }
+
+    @PostMapping("/associar/{idL}/{idO}")
+    public ResponseEntity<Linea> joinLineOferta(@Valid @PathVariable Long idL, @Valid @PathVariable Long idO){
+        return lineService.joinLineOferta(idL, idO);
     }
 }

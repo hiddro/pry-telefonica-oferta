@@ -10,4 +10,6 @@ public interface ILineService {
     public ResponseEntity<Linea> addLine(Long id, Linea linea);
 
     public ResponseEntity<Linea> getLineById(Long id);
+
+    public ResponseEntity<Linea> joinLineOferta(Long idL, Long idO);
 }

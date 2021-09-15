@@ -24,20 +24,8 @@ public class OfertaServiceImpl implements IOfertaService {
     @Override
     public ResponseEntity<Oferta> addOferta(Oferta oferta) {
         Map<String, Object> response = new HashMap<>();
-//        List<Oferta> listaOferta = new ArrayList<>();
-//
-//        Optional<Linea> linea = Optional.ofNullable(lineRepository.findById(id).orElse(Linea.builder().build()));
-//
-//        if(linea.get().getIdLinea() == null){
-//            response.put("mensaje", "la linea con estos datos no existe");
-//            return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
-//        }
 
         Oferta ofert = ofertaRepository.save(oferta);
-//        listaOferta.add(ofert);
-//
-//        linea.get().setOfertas(listaOferta);
-//        lineRepository.save(linea.get());
 
         response.put("mensaje", "Se registró la oferta");
         response.put("oferta", ofert);
