@@ -1,5 +1,6 @@
 package com.oferta.telefonica.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,7 +23,7 @@ public class Oferta implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idOferta;
 
     private String codigoOferta;
 
@@ -32,13 +33,17 @@ public class Oferta implements Serializable {
     @Column(name = "start_oferta")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date startOferta;
 
     @NotNull
     @Column(name = "end_oferta")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date endOferta;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    private Linea Linea;
 }

@@ -31,7 +31,7 @@ public class ClientServiceImpl implements IClientService {
         Optional<Cliente> getClient = Optional.ofNullable(clientRepository.validate(cliente.getTypeDocument(), cliente.getNumberDocument())
                 .orElse(Cliente.builder().build()));
 
-        if(getClient.get().getId() != null){
+        if(getClient.get().getIdCliente() != null){
             response.put("mensaje", "el cliente con estos datos ya existe");
             return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
         }
@@ -96,7 +96,7 @@ public class ClientServiceImpl implements IClientService {
 
         response.put("mensaje", "Se actualizo el cliente correctamente");
         response.put("cliente", cliente);
-        cliente.setId(id);
+        cliente.setIdCliente(id);
         clientRepository.save(cliente);
 
         return new ResponseEntity(response, HttpStatus.OK);

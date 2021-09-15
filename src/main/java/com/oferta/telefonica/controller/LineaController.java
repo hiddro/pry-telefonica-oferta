@@ -16,13 +16,14 @@ public class LineaController {
     @Autowired
     private ILineService lineService;
 
-    @PostMapping("/saveClient")
-    public ResponseEntity<Linea> saveLine(@Valid @RequestBody Linea linea){
-        return lineService.saveLine(linea);
+
+    @PostMapping("/addLine/{id}")
+    public ResponseEntity<Linea> addLineClient(@Valid @PathVariable Long id, @Valid @RequestBody Linea linea){
+        return lineService.addLine(id, linea);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Linea> getClientById(@Valid @PathVariable Long id){
+    public ResponseEntity<Linea> getLineById(@Valid @PathVariable Long id){
         return lineService.getLineById(id);
     }
 }

@@ -21,7 +21,7 @@ public class Linea implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idLinea;
 
     @Column(name = "nro_telefono")
     private String nroTelefono;
@@ -35,11 +35,11 @@ public class Linea implements Serializable {
     @Column(name = "nombre_plan")
     private String nombrePlan;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference
-    private Cliente cliente;
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "linea_id")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "line_offer",
+            joinColumns = @JoinColumn(name = "idLinea"),
+            inverseJoinColumns = @JoinColumn(name = "idOferta")
+    )
     private List<Oferta> ofertas;
 }

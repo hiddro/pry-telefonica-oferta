@@ -27,7 +27,7 @@ public class Cliente implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idCliente;
 
     @Column(name = "name")
     private String name;
@@ -38,15 +38,20 @@ public class Cliente implements Serializable {
     @Column(name = "number_document")
     private String numberDocument;
 
-    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    //    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "customer_line",
+            joinColumns = @JoinColumn(name = "idCliente"),
+            inverseJoinColumns = @JoinColumn(name = "idLinea")
+    )
     private List<Linea> lineas;
 
     @NotNull
     @Column(name = "create_client")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date createClient;
 
 }

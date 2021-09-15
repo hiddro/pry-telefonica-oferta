@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ILineService {
 
-    public ResponseEntity<Linea> saveLine(Linea linea);
+    public ResponseEntity<Linea> addLine(Long id, Linea linea);
 
     public ResponseEntity<Linea> getLineById(Long id);
 }
