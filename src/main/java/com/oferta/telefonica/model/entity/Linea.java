@@ -3,6 +3,7 @@ package com.oferta.telefonica.model.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "lineas")
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Linea implements Serializable {

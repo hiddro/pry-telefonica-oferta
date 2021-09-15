@@ -6,5 +6,8 @@ import org.springframework.http.ResponseEntity;
 
 public interface IOfertaService {
 
-    public ResponseEntity<Oferta> addOferta(Long id, Oferta oferta);
+    public ResponseEntity<Oferta> addOferta(Oferta oferta);
+
+    public ResponseEntity<Oferta> getOfertaById(Long id);
+
 }

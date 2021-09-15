@@ -16,8 +16,14 @@ public class OfertaController {
     @Autowired
     private IOfertaService ofertaService;
 
-    @PostMapping("/addOfertaLine/{id}")
-    public ResponseEntity<Oferta> addOferta(@Valid @PathVariable Long id, @Valid @RequestBody Oferta oferta){
-        return ofertaService.addOferta(id, oferta);
+//    @PostMapping("/addOfertaLine/{idL}/{idO}") @Valid @PathVariable Long id,
+    @PostMapping("/saveOffert")
+    public ResponseEntity<Oferta> addOferta(@Valid @RequestBody Oferta oferta){
+        return ofertaService.addOferta(oferta);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Oferta> getOfertaById(@Valid @PathVariable Long id){
+        return ofertaService.getOfertaById(id);
     }
 }

@@ -3,6 +3,7 @@ package com.oferta.telefonica.model.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,6 +16,7 @@ import java.util.Date;
 @Entity
 @Table(name = "ofertas")
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Oferta implements Serializable {
@@ -42,8 +44,4 @@ public class Oferta implements Serializable {
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date endOferta;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference
-    private Linea Linea;
 }

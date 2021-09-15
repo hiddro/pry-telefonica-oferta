@@ -26,6 +26,7 @@ public class LineServiceImpl implements ILineService {
     @Override
     public ResponseEntity<Linea> addLine(Long id, Linea linea) {
         Map<String, Object> response = new HashMap<>();
+        List<Linea> listaLin = new ArrayList<>();
 
         Optional<Cliente> client = Optional.ofNullable(clientRepository.findById(id).orElse(Cliente.builder().build()));
 
@@ -36,7 +37,6 @@ public class LineServiceImpl implements ILineService {
 
         /*Create Line*/
         Linea line = lineRepository.save(linea);
-        List<Linea> listaLin = new ArrayList<>();
         listaLin.add(line);
 
         /*Asociar Line - Cliente*/
