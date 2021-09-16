@@ -29,24 +29,18 @@ public class LineServiceImpl implements ILineService {
     private IOfertaRepository ofertaRepository;
 
     @Override
-    public ResponseEntity<Linea> addLine(Long id, Linea linea) {
+    public ResponseEntity<Linea> addLine(Linea linea) {
         Map<String, Object> response = new HashMap<>();
-        List<Linea> listaLin = new ArrayList<>();
 
-        Optional<Cliente> client = Optional.ofNullable(clientRepository.findById(id).orElse(Cliente.builder().build()));
+        Optional<Linea> getLinea = Optional.ofNullable(lineRepository.findByNroTelefono(linea.getNroTelefono())
+                .orElse(Linea.builder().build()));
 
-        if(client.get().getIdCliente() == null){
-            response.put("mensaje", "el cliente con estos datos no existe");
+        if(getLinea.get().getIdLinea() != null){
+            response.put("mensaje", "la linea con estos datos ya existe");
             return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
         }
 
-        /*Create Line*/
         Linea line = lineRepository.save(linea);
-        listaLin.add(line);
-
-        /*Asociar Line - Cliente*/
-        client.get().setLineas(listaLin);
-        clientRepository.save(client.get());
 
         response.put("mensaje", "Se registró la linea");
         response.put("linea", line);

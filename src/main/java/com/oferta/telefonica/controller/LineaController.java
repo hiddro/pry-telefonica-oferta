@@ -16,12 +16,12 @@ public class LineaController {
     private ILineService lineService;
 
 
-    @PostMapping("/addLine/{id}")
-    public ResponseEntity<Linea> addLineClient(@Valid @PathVariable Long id, @Valid @RequestBody Linea linea){
-        return lineService.addLine(id, linea);
+    @PostMapping("/addLine")
+    public ResponseEntity<Linea> addLineClient(@Valid @RequestBody Linea linea){
+        return lineService.addLine(linea);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/searcLine/{id}")
     public ResponseEntity<Linea> getLineById(@Valid @PathVariable Long id){
         return lineService.getLineById(id);
     }

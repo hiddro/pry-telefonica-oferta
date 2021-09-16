@@ -9,8 +9,8 @@ info:
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "localhost:8082/api"
-basePath: "/client"
+host: "localhost:8082"
+basePath: "/api"
 tags:
   - name: "cliente"
     description: "Todo lo necesario para los servicios del Cliente"
@@ -28,7 +28,7 @@ schemes:
 #  - "https"
   - "http"
 paths:
-  /saveClient:
+  /client/saveClient:
     post:
       tags:
         - "cliente"
@@ -64,7 +64,7 @@ paths:
         '405':
           description: Invalid input
       deprecated: false
-  /searchAll:
+  /client/searchAll:
     get:
       tags:
         - "cliente"
@@ -88,7 +88,7 @@ paths:
         '404':
           description: Not Found
       deprecated: false
-  /search/{id}:
+  /client/search/{id}:
     get:
       tags:
         - "cliente"
@@ -119,7 +119,7 @@ paths:
         '404':
           description: Cliente not found
       deprecated: false
-  /updateClient/{id}:
+  /client/updateClient/{id}:
     put:
       tags:
         - "cliente"
@@ -161,7 +161,7 @@ paths:
         '404':
           description: Not Found
       deprecated: false
-  /deleteClient/{id}:
+  /client/deleteClient/{id}:
     delete:
       tags:
         - "cliente"
@@ -192,6 +192,54 @@ paths:
         '403':
           description: Forbidden
       deprecated: false
+  /line/addLine/{id}:
+    post:
+      tags:
+        - "linea"
+      summary: "Agregar una nueva linea telefonica asociando al cliente"
+      description: ""
+      operationId: "addLineClient"
+      consumes:
+        - "application/json"
+      produces:
+        - "*/*"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID del cliente a relacionar"
+          required: true
+          type: "integer"
+          format: "int64"
+        - in: "body"
+          name: "body"
+          description: "formato para el de una linea telefonica"
+          required: true
+          schema:
+            $ref: "#/definitions/Linea"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '405':
+          description: Invalid input
+      deprecated: false
+  /searcLine/{id}:
+    get:
+  /associar/{idL}/{idO}:
+    post:
+  /get/{type}/{number}:
+    get:
 #      security:
 #        - petstore_auth:
 #            - "write:pets"
@@ -816,6 +864,26 @@ definitions:
         example: ""
     xml:
       name: "Cliente"
+  Linea:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      nroTelefono:
+        type: "string"
+        example: ""
+      estado:
+        type: "string"
+        example: ""
+      type:
+        type: "string"
+        example: ""
+      nombrePlan:
+        type: "string"
+        example: ""
+    xml:
+      name: "Linea"
   ApiResponse:
     type: "object"
     properties:
