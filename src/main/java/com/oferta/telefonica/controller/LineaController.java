@@ -1,8 +1,6 @@
 package com.oferta.telefonica.controller;
 
-import com.oferta.telefonica.model.entity.Cliente;
 import com.oferta.telefonica.model.entity.Linea;
-import com.oferta.telefonica.model.entity.Oferta;
 import com.oferta.telefonica.service.ILineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

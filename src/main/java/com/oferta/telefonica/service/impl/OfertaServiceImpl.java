@@ -1,6 +1,5 @@
 package com.oferta.telefonica.service.impl;
 
-import com.oferta.telefonica.model.entity.Linea;
 import com.oferta.telefonica.model.entity.Oferta;
 import com.oferta.telefonica.repository.ILineRepository;
 import com.oferta.telefonica.repository.IOfertaRepository;
@@ -10,8 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service

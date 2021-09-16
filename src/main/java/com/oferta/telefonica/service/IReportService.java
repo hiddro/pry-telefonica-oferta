@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface IReportService {
 
-    public ResponseEntity<List<Cliente>> getOfertaFechas(String fi);
+    public ResponseEntity<List<Cliente>> getOfertaFechas(String finic, String ffin);
 }
