@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.validation.Valid;
 
-//@Component
-//public class OfertaCache {
-//
-//    @Autowired
-//    private IOfertaRepository ofertaRepository;
-//
-//    @Cacheable(value = "ofertaCache", key = "#codigoOferta")
-//    public OfertaDto getOferta(String codigoOferta){
-//        System.out.println("Obteniendo de DB Cache por el codigo oferta " + codigoOferta);
-//        return ofertaRepository.findByCodigoOferta(codigoOferta);
-//    }
-//}
+@Component
+public class OfertaCache {
+
+    @Autowired
+    private IOfertaRepository ofertaRepository;
+
+    @Cacheable(value = "ofertaCache", key = "#codigoOferta")
+    public Oferta getOferta(String codigoOferta){
+        System.out.println("Obteniendo de DB Cache por el codigo oferta " + codigoOferta);
+        return ofertaRepository.findByCodigoOferta(codigoOferta);
+    }
+}

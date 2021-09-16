@@ -1,6 +1,6 @@
 package com.oferta.telefonica.controller;
 
-//import com.oferta.telefonica.cache.OfertaCache;
+import com.oferta.telefonica.cache.OfertaCache;
 import com.oferta.telefonica.model.entity.Oferta;
 import com.oferta.telefonica.service.IOfertaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +16,16 @@ public class OfertaController {
     @Autowired
     private IOfertaService ofertaService;
 
-//    @Autowired
-//    OfertaCache ofertaCache;
+    @Autowired
+    OfertaCache ofertaCache;
 
     @PostMapping("/saveOffert")
     public ResponseEntity<Oferta> addOferta(@Valid @RequestBody Oferta oferta){
         return ofertaService.addOferta(oferta);
     }
 
-//    @GetMapping("/{codigoOferta}")
-//    public OfertaDto getOferta(@PathVariable final String codigoOferta){
-//        return ofertaCache.getOferta(codigoOferta);
-//    }
+    @GetMapping("/{codigoOferta}")
+    public Oferta getOferta(@PathVariable String codigoOferta){
+        return ofertaCache.getOferta(codigoOferta);
+    }
 }
