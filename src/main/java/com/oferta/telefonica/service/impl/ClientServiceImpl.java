@@ -100,15 +100,14 @@ public class ClientServiceImpl implements IClientService {
 
     @Override
     public ResponseEntity<Cliente> deleteClient(Long id) {
-//        Map<String, Object> response = new HashMap<>();
-//        return clientRepository.findById(id).map(c -> {
-//            response.put("mensaje", "Se elimino el cliente correctamente");
-//            response.put("cliente", c);
-//
-//            clientRepository.delete(c);
-//            return new ResponseEntity(response, HttpStatus.OK);
-//        }).orElse(new ResponseEntity("no se encontro al cliente", HttpStatus.BAD_REQUEST));
-        return null;
+        Map<String, Object> response = new HashMap<>();
+        return clientRepository.findById(id).map(c -> {
+            response.put("mensaje", "Se elimino el cliente correctamente");
+            response.put("cliente", c);
+
+            clientRepository.delete(c);
+            return new ResponseEntity(response, HttpStatus.OK);
+        }).orElse(new ResponseEntity("no se encontro al cliente", HttpStatus.BAD_REQUEST));
     }
 
 }

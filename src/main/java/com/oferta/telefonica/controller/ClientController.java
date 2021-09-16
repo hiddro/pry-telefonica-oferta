@@ -22,7 +22,7 @@ public class ClientController {
         return clientService.saveClient(client);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/search/{id}")
     public ResponseEntity<Cliente> getClientById(@Valid @PathVariable Long id){
         return clientService.getClientById(id);
     }
