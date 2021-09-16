@@ -24,7 +24,7 @@ public class ClientController {
     }
 
     @PostMapping("/asociar/{idC}/{idL}")
-    public ResponseEntity<Linea> joinLineOferta(@Valid @PathVariable Long idC, @Valid @PathVariable Long idL){
+    public ResponseEntity<Linea> joinClientLine(@Valid @PathVariable Long idC, @Valid @PathVariable Long idL){
         return clientService.joinClientLine(idC, idL);
     }
 
