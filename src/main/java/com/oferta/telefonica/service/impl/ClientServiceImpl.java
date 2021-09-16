@@ -2,7 +2,6 @@ package com.oferta.telefonica.service.impl;
 
 import com.oferta.telefonica.model.entity.Cliente;
 import com.oferta.telefonica.model.entity.Linea;
-import com.oferta.telefonica.model.entity.Oferta;
 import com.oferta.telefonica.repository.IClientRepository;
 import com.oferta.telefonica.repository.ILineRepository;
 import com.oferta.telefonica.service.IClientService;
