@@ -27,6 +27,7 @@ public class Oferta implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idOferta;
 
+    @Column(name = "codigo_oferta")
     private String codigoOferta;
 
     private String descripcion;

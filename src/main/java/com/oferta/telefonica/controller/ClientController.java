@@ -1,6 +1,7 @@
 package com.oferta.telefonica.controller;
 
 import com.oferta.telefonica.model.entity.Cliente;
+import com.oferta.telefonica.model.entity.Oferta;
 import com.oferta.telefonica.service.IClientService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import java.text.ParseException;
 import java.util.*;
 
 @RestController
@@ -43,4 +45,6 @@ public class ClientController {
     public ResponseEntity<Cliente> deleteClient(@Valid @PathVariable("id") Long id){
         return clientService.deleteClient(id);
     }
+
+
 }

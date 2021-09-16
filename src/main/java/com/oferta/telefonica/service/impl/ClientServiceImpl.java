@@ -2,16 +2,19 @@ package com.oferta.telefonica.service.impl;
 
 import com.oferta.telefonica.model.entity.Cliente;
 import com.oferta.telefonica.model.entity.Linea;
+import com.oferta.telefonica.model.entity.Oferta;
 import com.oferta.telefonica.repository.IClientRepository;
 import com.oferta.telefonica.repository.ILineRepository;
 import com.oferta.telefonica.service.IClientService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -114,6 +117,5 @@ public class ClientServiceImpl implements IClientService {
 //        }).orElse(new ResponseEntity("no se encontro al cliente", HttpStatus.BAD_REQUEST));
         return null;
     }
-
 
 }
