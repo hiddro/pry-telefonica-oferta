@@ -1,5 +1,6 @@
 package com.oferta.telefonica.controller;
 
+import com.oferta.telefonica.model.entity.Cliente;
 import com.oferta.telefonica.model.entity.Linea;
 import com.oferta.telefonica.service.ILineService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,15 @@ public class LineaController {
     @GetMapping("/get/{type}/{number}")
     public ResponseEntity<Linea> getReturnLineOfert(@Valid @PathVariable String type, @Valid @PathVariable String number){
         return lineService.getLineOfert(type, number);
+    }
+
+    @PutMapping("/changePlan/{id}")
+    public ResponseEntity<Linea> getChangePlan(@Valid @PathVariable("id") Long id, @Valid @RequestBody Linea linea){
+        return lineService.getChangePlan(id, linea);
+    }
+
+    @PutMapping("/changeState/{id}")
+    public ResponseEntity<Linea> getChangeState(@Valid @PathVariable("id") Long id){
+        return lineService.getChangeState(id);
     }
 }

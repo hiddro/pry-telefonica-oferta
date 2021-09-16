@@ -106,5 +106,30 @@ public class LineServiceImpl implements ILineService {
 
     }
 
+    @Override
+    public ResponseEntity<Linea> getChangePlan(Long id, Linea linea) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Linea> getChangeState(Long id) {
+        Map<String, Object> response = new HashMap<>();
+        Optional<Linea> existLine = lineRepository.findById(id);
+
+        if(existLine.get().getIdLinea() == null){
+            return new ResponseEntity("La Linea telefonica no existe", HttpStatus.BAD_REQUEST);
+        }
+
+        String state = existLine.get().getEstado().equals("Activo") ? "Cancelado" : "Activo";
+        existLine.get().setEstado(state);
+
+        lineRepository.save(existLine.get());
+
+        response.put("mensaje", "Se cambio el estado a la linea telefonica " + existLine.get().getNroTelefono());
+        response.put("linea", existLine.get());
+
+        return new ResponseEntity(response, HttpStatus.OK);
+    }
+
 
 }
