@@ -1,6 +1,7 @@
 package com.oferta.telefonica.controller;
 
 import com.oferta.telefonica.model.entity.Cliente;
+import com.oferta.telefonica.model.entity.Linea;
 import com.oferta.telefonica.service.IClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,11 @@ public class ClientController {
     @PostMapping("/saveClient")
     public ResponseEntity<Cliente> saveClient(@Valid @RequestBody Cliente client){
         return clientService.saveClient(client);
+    }
+
+    @PostMapping("/asociar/{idC}/{idL}")
+    public ResponseEntity<Linea> joinLineOferta(@Valid @PathVariable Long idC, @Valid @PathVariable Long idL){
+        return clientService.joinClientLine(idC, idL);
     }
 
     @GetMapping("/search/{id}")

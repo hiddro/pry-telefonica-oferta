@@ -1,6 +1,8 @@
 package com.oferta.telefonica.service.impl;
 
 import com.oferta.telefonica.model.entity.Cliente;
+import com.oferta.telefonica.model.entity.Linea;
+import com.oferta.telefonica.model.entity.Oferta;
 import com.oferta.telefonica.repository.IClientRepository;
 import com.oferta.telefonica.repository.ILineRepository;
 import com.oferta.telefonica.service.IClientService;
@@ -38,6 +40,34 @@ public class ClientServiceImpl implements IClientService {
 
         return new ResponseEntity(response, HttpStatus.OK);
 
+    }
+
+    @Override
+    public ResponseEntity<Linea> joinClientLine(Long idC, Long idL) {
+        Map<String, Object> response = new HashMap<>();
+        List<Linea> listaLinea = new ArrayList<>();
+
+        Optional<Cliente> cliente = Optional.ofNullable(clientRepository.findById(idC).orElse(Cliente.builder().build()));
+        Optional<Linea> linea = Optional.ofNullable(lineRepository.findById(idL).orElse(Linea.builder().build()));
+
+        if (cliente.get().getIdCliente() == null || linea.get().getIdLinea() == null){
+            return new ResponseEntity("Uno de los Id no existe en la Base de Datos", HttpStatus.BAD_REQUEST);
+        }
+
+        listaLinea.add(linea.get());
+
+        if(cliente.get().getLineas().size() == 0){
+            cliente.get().setLineas(listaLinea);
+        }else{
+            cliente.get().getLineas().add(linea.get());
+        }
+
+        clientRepository.save(cliente.get());
+
+        response.put("mensaje", "Se agrego la linea" + linea.get().getNroTelefono() + " al cliente " + cliente.get().getName());
+        response.put("cliente", cliente.get());
+
+        return new ResponseEntity(response, HttpStatus.OK);
     }
 
     @Override

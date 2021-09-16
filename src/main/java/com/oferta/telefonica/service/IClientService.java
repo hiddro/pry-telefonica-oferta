@@ -1,6 +1,7 @@
 package com.oferta.telefonica.service;
 
 import com.oferta.telefonica.model.entity.Cliente;
+import com.oferta.telefonica.model.entity.Linea;
 import com.oferta.telefonica.model.entity.Oferta;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,8 @@ import java.util.List;
 public interface IClientService {
 
     public ResponseEntity<Cliente> saveClient(Cliente cliente);
+
+    public ResponseEntity<Linea> joinClientLine(Long idC, Long idL);
 
     public ResponseEntity<Cliente> getClientById(Long id);
 
