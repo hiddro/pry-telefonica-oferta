@@ -238,7 +238,7 @@ paths:
     post:
       tags:
         - "linea"
-      summary: "Agregar una nueva linea telefonica asociando al cliente"
+      summary: "Agregar una nueva linea telefonica"
       description: ""
       operationId: "addLineClient"
       consumes:
@@ -442,6 +442,42 @@ paths:
           required: true
           type: "integer"
           format: "int64"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '405':
+          description: Invalid input
+      deprecated: false
+  /oferta/saveOffert:
+    post:
+      tags:
+        - "oferta"
+      summary: "Agregar una nueva Oferta"
+      description: ""
+      operationId: "addOferta"
+      consumes:
+        - "application/json"
+      produces:
+        - "*/*"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Formato para el registro de una oferta"
+          required: true
+          schema:
+            $ref: "#/definitions/Oferta"
       responses:
         '200':
           description: OK
@@ -1104,6 +1140,26 @@ definitions:
         example: ""
     xml:
       name: "Linea"
+  Oferta:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      codigoOferta:
+        type: "string"
+        example: ""
+      descripcion:
+        type: "string"
+        example: ""
+      startOferta:
+        type: "string"
+        example: ""
+      endOferta:
+        type: "string"
+        example: ""
+    xml:
+      name: "Oferta"
   ApiResponse:
     type: "object"
     properties:

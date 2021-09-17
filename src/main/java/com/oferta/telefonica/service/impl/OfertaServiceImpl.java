@@ -37,16 +37,4 @@ public class OfertaServiceImpl implements IOfertaService {
 
         return new ResponseEntity(response, HttpStatus.OK);
     }
-
-//    @Override
-//    public ResponseEntity<Oferta> getOfertaById(Long id) {
-//        Map<String, Object> response = new HashMap<>();
-//        Optional<Oferta> existOferta = ofertaRepository.findById(id);
-//        return existOferta.map(c -> {
-//            response.put("mensaje", "Se encontro la oferta");
-//            response.put("oferta", c);
-//
-//            return new ResponseEntity(response, HttpStatus.OK);
-//        }).orElse(new ResponseEntity("no se encontro la oferta", HttpStatus.BAD_REQUEST));
-//    }
 }
