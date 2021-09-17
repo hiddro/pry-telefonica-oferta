@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/oferta")
@@ -27,5 +28,10 @@ public class OfertaController {
     @GetMapping("/{codigoOferta}")
     public Oferta getOferta(@PathVariable String codigoOferta){
         return ofertaCache.getOferta(codigoOferta);
+    }
+
+    @GetMapping("/allOfertas")
+    public List<Oferta> getAllOfertaAll(){
+        return ofertaCache.getOfertaAll();
     }
 }
