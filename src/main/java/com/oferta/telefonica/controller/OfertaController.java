@@ -31,7 +31,7 @@ public class OfertaController {
     }
 
     @GetMapping("/allOfertas")
-    public List<Oferta> getAllOfertaAll(){
+    public List<Oferta> getAllOferta(){
         return ofertaCache.getOfertaAll();
     }
 }

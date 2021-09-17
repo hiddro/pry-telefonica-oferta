@@ -528,6 +528,28 @@ paths:
       deprecated: false
   /oferta/allOfertas:
     get:
+      tags:
+        - "oferta"
+      summary: "Buscar todos las ofertas"
+      description: "Se encontrara el catalogo de oferta mediante EhCache"
+      operationId: "getAllOferta"
+      produces:
+        - "application/xml"
+        - "application/json"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Oferta'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
 #      security:
 #        - petstore_auth:
 #            - "write:pets"
