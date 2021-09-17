@@ -379,7 +379,7 @@ paths:
           description: Linea Telefonica y Ofertas not found
       deprecated: false
   /line/changePlan/{id}:
-    post:
+    put:
       tags:
         - "linea"
       summary: "Cambiar plan de una linea telefonica"
@@ -387,8 +387,10 @@ paths:
       operationId: "getChangePlan"
       consumes:
         - "application/json"
+        - "application/xml"
       produces:
-        - "*/*"
+        - "application/xml"
+        - "application/json"
       parameters:
         - name: "id"
           in: "path"
@@ -396,6 +398,12 @@ paths:
           required: true
           type: "integer"
           format: "int64"
+        - in: "body"
+          name: "body"
+          description: "Formato para el registro de una linea telefonica"
+          required: true
+          schema:
+            $ref: "#/definitions/Linea"
       responses:
         '200':
           description: OK
