@@ -85,24 +85,6 @@ public class ClientServiceImpl implements IClientService {
     public ResponseEntity<List<Cliente>> getAllClient() {
         Map<String, Object> response = new HashMap<>();
         List<Cliente> listClient = clientRepository.findAll();
-//        List<Cliente> listaClient = clientRepository.findAll()
-//                .stream()
-//                .map(c -> {
-//                    Optional<Linea> linea = lineRepository.findById(c.getId());
-//                    List<Linea> lista = new ArrayList<>();
-//                    Linea lin = new Linea();
-//                    lin.setId(linea.get().getId());
-//                    lin.setCliente(linea.get().getCliente());
-//                    lin.setEstado(linea.get().getEstado());
-//                    lin.setOfertas(linea.get().getOfertas());
-//                    lin.setType(linea.get().getType());
-//                    lin.setNombrePlan(linea.get().getNombrePlan());
-//                    lin.setNroTelefono(linea.get().getNroTelefono());
-//                    lista.add(lin);
-//                    c.setLineas(lista);
-//                    return c;
-//                })
-//                .collect(Collectors.toList());
 
         response.put("mensaje", "Se encontro todos los clientes correctamente");
         response.put("cliente", listClient);
