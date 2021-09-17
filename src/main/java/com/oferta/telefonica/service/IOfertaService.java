@@ -11,6 +11,4 @@ import java.util.List;
 public interface IOfertaService {
 
     public ResponseEntity<Oferta> addOferta(Oferta oferta);
-
-    public ResponseEntity<Oferta> getOfertaById(Long id);
 }
