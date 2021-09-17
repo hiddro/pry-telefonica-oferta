@@ -40,6 +40,16 @@ public class LineServiceImpl implements ILineService {
             return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
         }
 
+        if(linea.getType().contains("Prepago")){
+            if(!linea.getNombrePlan().contains("Prepago")){
+                return new ResponseEntity("El plan para Prepago no es correcto", HttpStatus.BAD_REQUEST);
+            }
+        }else if(linea.getType().contains("Postpago")){
+            if(!linea.getNombrePlan().contains("Plan S/.")){
+                return new ResponseEntity("El plan para Postpago no es correcto", HttpStatus.BAD_REQUEST);
+            }
+        }
+
         Linea line = lineRepository.save(linea);
 
         response.put("mensaje", "Se registró la linea");
@@ -108,7 +118,32 @@ public class LineServiceImpl implements ILineService {
 
     @Override
     public ResponseEntity<Linea> getChangePlan(Long id, Linea linea) {
-        return null;
+        Map<String, Object> response = new HashMap<>();
+        Optional<Linea> existLine = Optional.ofNullable(lineRepository.findById(id).orElse(Linea.builder().build()));
+
+        if(existLine.get().getIdLinea() == null){
+            response.put("mensaje", "la linea con estos datos no existe");
+            return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
+        }
+
+        if(linea.getType().contains("Prepago")){
+            if(!linea.getNombrePlan().contains("Prepago")){
+                return new ResponseEntity("El plan para Prepago no es correcto", HttpStatus.BAD_REQUEST);
+            }
+        }else if(linea.getType().contains("Postpago")){
+            if(!linea.getNombrePlan().contains("Plan S/.")){
+                return new ResponseEntity("El plan para Postpago no es correcto", HttpStatus.BAD_REQUEST);
+            }
+        }
+
+        existLine.get().setType(linea.getType());
+        existLine.get().setNombrePlan(linea.getNombrePlan());
+        lineRepository.save(existLine.get());
+
+        response.put("mensaje", "Se cambio el plan de la linea");
+        response.put("linea", existLine.get());
+
+        return new ResponseEntity(response, HttpStatus.OK);
     }
 
     @Override
