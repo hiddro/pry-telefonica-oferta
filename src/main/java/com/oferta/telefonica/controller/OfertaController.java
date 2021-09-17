@@ -25,7 +25,7 @@ public class OfertaController {
         return ofertaService.addOferta(oferta);
     }
 
-    @GetMapping("/{codigoOferta}")
+    @GetMapping("/searchOferta/{codigoOferta}")
     public Oferta getOferta(@PathVariable String codigoOferta){
         return ofertaCache.getOferta(codigoOferta);
     }
