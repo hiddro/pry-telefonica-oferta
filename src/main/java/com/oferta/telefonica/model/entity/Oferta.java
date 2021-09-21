@@ -22,6 +22,7 @@ public class Oferta implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name = "id_oferta")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idOferta;
 
@@ -29,6 +30,9 @@ public class Oferta implements Serializable {
     private String codigoOferta;
 
     private String descripcion;
+
+    @Column(name = "have_line")
+    private String haveLine;
 
     @NotNull
     @Column(name = "start_oferta")

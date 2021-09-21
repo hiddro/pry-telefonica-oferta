@@ -53,6 +53,10 @@ public class ClientServiceImpl implements IClientService {
             return new ResponseEntity("Uno de los Id no existe en la Base de Datos", HttpStatus.BAD_REQUEST);
         }
 
+        if (linea.get().getHaveClient().equals("SI")){
+            return new ResponseEntity("No puede asociar esta linea debido a que ya esta en uso", HttpStatus.BAD_REQUEST);
+        }
+
         listaLinea.add(linea.get());
 
         if(cliente.get().getLineas().size() == 0){

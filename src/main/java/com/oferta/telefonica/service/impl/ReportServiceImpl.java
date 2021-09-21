@@ -12,10 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,6 +27,10 @@ public class ReportServiceImpl implements IReportService {
     @Override
     public ResponseEntity<List<Cliente>> getOfertaFechas(String finic, String ffin) {
         Map<String, Object> response = new HashMap<>();
+
+//        Optional<List<Cliente>> total = clientRepository.findByRangoFechas(finic, ffin);
+
+//        System.out.println("total = " + total);
 
         List<Long> ofertas = ofertaRepository.findAll()
                 .stream()

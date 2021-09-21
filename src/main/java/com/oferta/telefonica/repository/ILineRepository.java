@@ -14,4 +14,5 @@ public interface ILineRepository extends JpaRepository<Linea, Long> {
 
     @Query("SELECT l FROM Linea l WHERE l.nroTelefono = ?1")
     Optional<Linea> findByNroTelefono(String nroTelefono);
+
 }

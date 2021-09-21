@@ -50,6 +50,7 @@ public class LineServiceImpl implements ILineService {
             }
         }
 
+        linea.setHaveClient("NO");
         Linea line = lineRepository.save(linea);
 
         response.put("mensaje", "Se registró la linea");

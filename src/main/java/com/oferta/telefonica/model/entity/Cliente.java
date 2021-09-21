@@ -11,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class Cliente implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name = "id_cliente")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCliente;
 
@@ -38,13 +40,14 @@ public class Cliente implements Serializable {
     @Column(name = "number_document")
     private String numberDocument;
 
-    //    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "customer_line",
-            joinColumns = @JoinColumn(name = "idCliente"),
-            inverseJoinColumns = @JoinColumn(name = "idLinea")
-    )
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name = "customer_line",
+//            joinColumns = @JoinColumn(name = "idCliente"),
+//            inverseJoinColumns = @JoinColumn(name = "idLinea")
+//    )
+    @OneToMany(targetEntity = Linea.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "cliente_id", referencedColumnName = "id_cliente")
     private List<Linea> lineas;
 
     @NotNull
