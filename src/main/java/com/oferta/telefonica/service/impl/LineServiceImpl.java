@@ -83,6 +83,11 @@ public class LineServiceImpl implements ILineService {
             return new ResponseEntity("Uno de los Id no existe en la Base de Datos", HttpStatus.BAD_REQUEST);
         }
 
+        if (oferta.get().getHaveLine().equals("SI")){
+            return new ResponseEntity("No puede asociar esta oferta debido a que ya esta en uso", HttpStatus.BAD_REQUEST);
+        }
+
+        oferta.get().setHaveLine("SI");
         listaOferta.add(oferta.get());
 
         if(linea.get().getOfertas().size() == 0){

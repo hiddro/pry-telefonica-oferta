@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -25,70 +26,79 @@ public class ReportServiceImpl implements IReportService {
     private IOfertaRepository ofertaRepository;
 
     @Override
-    public ResponseEntity<List<Cliente>> getOfertaFechas(String finic, String ffin) {
+    public ResponseEntity<List<Cliente>> getOfertaFechas(String finic, String ffin) throws ParseException {
         Map<String, Object> response = new HashMap<>();
 
-//        Optional<List<Cliente>> total = clientRepository.findByRangoFechas(finic, ffin);
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        Date finicial = formato.parse(finic);
+        Date ffinal = formato.parse(ffin);
 
-//        System.out.println("total = " + total);
+        Optional<List<Oferta>> total = ofertaRepository.findByRangoFechas(finicial, ffinal);
 
-        List<Long> ofertas = ofertaRepository.findAll()
+        List<Cliente> clientesOfertas = clientRepository.findAll()
                 .stream()
                 .filter(c -> {
-                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                    String date = format.format(c.getStartOferta());
-                    return (
-                            compareDate(date, finic) > -1 && compareDate(date, ffin) < 1
-                    );
+                    int contador = 0;
+                    for (Linea x : c.getLineas()){
+                        if(x.getEstado().equals("Activo")){
+                            contador++;
+                        }
+                    }
+                    return contador >= 3;
                 })
-                .map(Oferta::getIdOferta)
-                .collect(Collectors.toList());
+                .map(d -> {
 
-        List<Cliente> cli =  clientRepository
-                .findAll()
-                .stream()
-                .filter(cliente-> cliente.getLineas().size() >= 3)
-                .filter(pl ->
-                        !pl
-                                .getLineas()
-                                .stream()
-                                .filter(opl -> opl.getEstado().equals("Activo"))
-                                .filter(opl -> opl.getOfertas().size() > 0)
-                                .filter(opl -> {
-                                    return !opl
-                                            .getOfertas()
-                                            .stream()
-                                            .filter(off -> {
-                                                return !ofertas
-                                                        .stream()
-                                                        .filter(ofertaid -> ofertaid == off.getIdOferta())
-                                                        .collect(Collectors.toList())
-                                                        .isEmpty();
-                                            })
-                                            .collect(Collectors.toSet())
-                                            .isEmpty();
-                                })
-                                .collect(Collectors.toList())
-                                .isEmpty()
-                )
+                    /*Creando el Objeto*/
+                    Cliente clt = new Cliente();
+                    Linea lna = new Linea();
+                    List<Linea> listaLna = new ArrayList<>();
+                    Oferta oft = new Oferta();
+                    List<Oferta> listaOft = new ArrayList<>();
+
+                    /*Replica del Cliente*/
+                    clt.setIdCliente(d.getIdCliente());
+                    clt.setName(d.getName());
+                    clt.setTypeDocument(d.getTypeDocument());
+                    clt.setNumberDocument(d.getNumberDocument());
+                    clt.setCreateClient(d.getCreateClient());
+
+                    for (Linea x: d.getLineas()){
+                        for (Oferta y: x.getOfertas()){
+                            for (Oferta z: total.get()){
+                                if(y.getIdOferta().equals(z.getIdOferta())){
+                                    /*Replica de la Linea*/
+                                    lna.setIdLinea(x.getIdLinea());
+                                    lna.setNroTelefono(x.getNroTelefono());
+                                    lna.setEstado(x.getEstado());
+                                    lna.setType(x.getType());
+                                    lna.setNombrePlan(x.getNombrePlan());
+                                    lna.setHaveClient(x.getHaveClient());
+                                    lna.setCreateLine(x.getCreateLine());
+                                    listaLna.add(lna);
+                                    clt.setLineas(listaLna);
+
+                                    /*Replicando la Oferta*/
+                                    oft.setIdOferta(y.getIdOferta());
+                                    oft.setCodigoOferta(y.getCodigoOferta());
+                                    oft.setDescripcion(y.getDescripcion());
+                                    oft.setHaveLine(y.getHaveLine());
+                                    oft.setStartOferta(y.getStartOferta());
+                                    oft.setEndOferta(y.getEndOferta());
+                                    listaOft.add(oft);
+                                    lna.setOfertas(listaOft);
+                                }
+                            }
+                        }
+                    }
+
+                    return clt;
+                })
                 .collect(Collectors.toList());
 
         response.put("mensaje", "Se obtuvo los registros");
-        response.put("reporte", cli);
+        response.put("reporte", clientesOfertas);
 
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
-    public static int compareDate(String dat1, String dat2) {
-        try {
-            SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-
-            Date compa1 = format1.parse(dat1);
-            Date compa2 = format1.parse(dat2);
-
-            return compa1.compareTo(compa2);
-        } catch (Exception e) {
-            return 0;
-        }
-    }
 }

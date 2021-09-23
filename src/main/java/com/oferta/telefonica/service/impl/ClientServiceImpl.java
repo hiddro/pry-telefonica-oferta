@@ -57,6 +57,7 @@ public class ClientServiceImpl implements IClientService {
             return new ResponseEntity("No puede asociar esta linea debido a que ya esta en uso", HttpStatus.BAD_REQUEST);
         }
 
+        linea.get().setHaveClient("SI");
         listaLinea.add(linea.get());
 
         if(cliente.get().getLineas().size() == 0){
@@ -67,7 +68,7 @@ public class ClientServiceImpl implements IClientService {
 
         clientRepository.save(cliente.get());
 
-        response.put("mensaje", "Se agrego la linea" + linea.get().getNroTelefono() + " al cliente " + cliente.get().getName());
+        response.put("mensaje", "Se agrego la linea " + linea.get().getNroTelefono() + " al cliente " + cliente.get().getName());
         response.put("cliente", cliente.get());
 
         return new ResponseEntity(response, HttpStatus.OK);

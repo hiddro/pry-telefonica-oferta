@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -19,7 +20,7 @@ public class ReportController {
     private IReportService reportService;
 
     @GetMapping("/get/{fini}/{ffin}")
-    public ResponseEntity<List<Cliente>> fechasRango(@PathVariable String fini, @PathVariable String ffin) {
+    public ResponseEntity<List<Cliente>> fechasRango(@PathVariable String fini, @PathVariable String ffin) throws ParseException {
         return reportService.getOfertaFechas(fini, ffin);
     }
 }

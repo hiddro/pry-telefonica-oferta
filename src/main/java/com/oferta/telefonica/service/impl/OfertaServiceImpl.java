@@ -30,6 +30,7 @@ public class OfertaServiceImpl implements IOfertaService {
             return new ResponseEntity("La oferta ya existe", HttpStatus.OK);
         }
 
+        oferta.setHaveLine("NO");
         Oferta ofert = ofertaRepository.save(oferta);
 
         response.put("mensaje", "Se registró la oferta");
